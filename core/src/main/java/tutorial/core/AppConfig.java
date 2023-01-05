@@ -15,7 +15,7 @@ public class AppConfig {
         return new MemberServiceImpl(memberRepository());
     }//생성자 주입
 
-    private MemberRepository memberRepository() {
+    public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 
