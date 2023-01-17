@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import tutorial.core.annotation.MainDiscountPolicy;
 import tutorial.core.discount.DiscountPolicy;
 import tutorial.core.discount.FixDiscountPolicy;
 import tutorial.core.discount.RateDiscountPolicy;
@@ -17,7 +18,7 @@ public class OrderServiceImpl implements  OrderService{
     private final MemberRepository memberRepository; //interface에만 의존하고 구체화에는 의존하지 않도록 DIP 원칙을 가져감
     private final DiscountPolicy discountPolicy; //interface에만 의존하고 구체화에는 의존하지 않도록 DIP 원칙을 가져감
 
-    public OrderServiceImpl(MemberRepository memberRepository,DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository,@MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
