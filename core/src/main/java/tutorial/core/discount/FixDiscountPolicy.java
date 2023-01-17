@@ -6,7 +6,6 @@ import tutorial.core.member.Grade;
 import tutorial.core.member.Member;
 
 @Component
-@Qualifier("fixDiscountPolicy")
 public class FixDiscountPolicy implements DiscountPolicy{
 
     private int discountFixAmount = 1000;
