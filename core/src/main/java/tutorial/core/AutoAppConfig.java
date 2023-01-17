@@ -15,9 +15,9 @@ import tutorial.core.member.MemoryMemberRepository;
 )
 public class AutoAppConfig {
 
-    @Bean(name="memoryMemberRepository")
-    MemberRepository memberRepository(){
-        return new MemoryMemberRepository();
-    }
+//    @Bean(name="memoryMemberRepository")
+//    MemberRepository memberRepository(){
+//        return new MemoryMemberRepository();
+//    } //spring bean 컴포넌트 스캔시 충돌 오류 막기.(springboot test일때)
 
 }
