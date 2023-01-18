@@ -8,11 +8,8 @@ import tutorial.core.common.MyLogger;
 @Service
 @RequiredArgsConstructor
 public class LogDemoService {
-    private final ObjectProvider<MyLogger> myLoggerObjectProvider;
-
+    private final MyLogger myLogger;
     public void logic(String testId) {
-
-        MyLogger myLogger = myLoggerObjectProvider.getObject();
         myLogger.log("Service id = "+ testId);
     }
 }
