@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 public class SingletonWithPrototypeTest1 {
 
@@ -45,10 +46,10 @@ public class SingletonWithPrototypeTest1 {
     @Scope("singleton")
     static class ClientBean{
         @Autowired
-        private ObjectFactory<PrototypeBean> prototypeBeanObjectProvider;//test니까 간략하게
+        private Provider<PrototypeBean> prototypeBeanObjectProvider;//test니까 간략하게
 
         public int logic(){
-            PrototypeBean prototypeBean = prototypeBeanObjectProvider.getObject();
+            PrototypeBean prototypeBean = prototypeBeanObjectProvider.get();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
