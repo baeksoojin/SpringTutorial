@@ -2,6 +2,8 @@ package tutorial.core.scope;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -35,21 +37,18 @@ public class SingletonWithPrototypeTest1 {
 
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();//역시 이미 생성되어있는 prototypeBean을 사용.
-        Assertions.assertThat(count2).isEqualTo(2);
+        Assertions.assertThat(count2).isEqualTo(1);
 
         //1 2개가 아닌 1 하나 2하나가 나온다.
     }
 
     @Scope("singleton")
     static class ClientBean{
-        private final PrototypeBean prototypeBean; // 생성시점에 주입완료.
-
         @Autowired
-        public ClientBean(PrototypeBean prototypeBean){
-            this.prototypeBean = prototypeBean;
-        }
+        private ObjectFactory<PrototypeBean> prototypeBeanObjectProvider;//test니까 간략하게
 
         public int logic(){
+            PrototypeBean prototypeBean = prototypeBeanObjectProvider.getObject();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
