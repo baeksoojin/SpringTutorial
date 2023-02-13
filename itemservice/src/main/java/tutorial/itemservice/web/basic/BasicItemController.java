@@ -69,10 +69,16 @@ public class BasicItemController {
     }//이름을 생략한 버전. name속성은 Item class의 첫글자를 소문자로 변경
 
 
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV4(Item item){
         itemRepository.save(item);
         return "basic/item";
+    }//@ModelAttribute자체를 생략
+
+    @PostMapping("/add")
+    public String addItemV5(Item item){
+        itemRepository.save(item);
+        return "redirect:/basic/items"+item.getId();
     }//@ModelAttribute자체를 생략
 
 
