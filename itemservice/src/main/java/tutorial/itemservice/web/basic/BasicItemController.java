@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tutorial.itemservice.domain.Item;
 import tutorial.itemservice.domain.ItemRepository;
 
@@ -75,10 +76,18 @@ public class BasicItemController {
         return "basic/item";
     }//@ModelAttribute자체를 생략
 
-    @PostMapping("/add")
+    //@PostMapping("/add")
     public String addItemV5(Item item){
         itemRepository.save(item);
         return "redirect:/basic/items"+item.getId();
+    }//@ModelAttribute자체를 생략
+
+    @PostMapping("/add")
+    public String addItemV6(Item item, RedirectAttributes redirectAttributes){
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId",savedItem.getId());//url에 넘길것
+        redirectAttributes.addAttribute("status",true);//query parameter로 넘기고 처리
+        return "redirect:/basic/items/{itemId}"; //encoding을 처리해주는 redirectAttribute
     }//@ModelAttribute자체를 생략
 
 
