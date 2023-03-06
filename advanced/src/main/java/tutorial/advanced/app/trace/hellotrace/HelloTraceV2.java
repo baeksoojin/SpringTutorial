@@ -23,7 +23,7 @@ public class HelloTraceV2 {
 
     public TraceStatus beginSync(TraceId beforeTraceId,String message) {
         //TraceId traceId = new TraceId();
-        TraceId nextId = beforeTraceId.createNextId();
+        TraceId nextId = beforeTraceId.createNextId();//id는 똑같이하고 level을 다르게함.
         Long startTimeMs = System.currentTimeMillis();
         log.info("[{}] {}{}", nextId.getId(), addSpace(START_PREFIX,
                 nextId.getLevel()), message);
